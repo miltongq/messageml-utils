@@ -17,16 +17,16 @@ public class TextAreaTest extends ElementTest {
   private static final String PLACEHOLDER_VALUE = "A placeholder";
   private static final String INITIAL_VALUE = "An initial value";
 
-  private static final String EXPECTED_MARKDOWN = "Form (log into desktop client to answer):\n---\n(Text Area)\n---\n";
+  private static final String EXPECTED_MARKDOWN = "Form (log into desktop client to answer):\n---\n(Text Area)" + ACTION_BTN_MD + "\n---\n";
   private static final String EXPECTED_MARKDOWN_WITH_PLACEHOLDER =
-      String.format("Form (log into desktop client to answer):\n---\n(Text Area:%s)\n---\n", PLACEHOLDER_VALUE);
+      String.format("Form (log into desktop client to answer):\n---\n(Text Area:%s)" + ACTION_BTN_MD + "\n---\n", PLACEHOLDER_VALUE);
 
   @Test
   public void testTextAreaWithRequiredAttributesOnly() throws Exception {
-    String input = String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\"></textarea></form></messageML>", NAME_VALUE);
+    String input = String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\"></textarea>%s</form></messageML>", NAME_VALUE, ACTION_BTN_ELE);
     String expectedPresentationML =
-        String.format("<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\"></textarea></form></div>",
-            NAME_VALUE);
+        String.format("<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\"></textarea>%s</form></div>",
+            NAME_VALUE, ACTION_BTN_ELE);
 
     context.parseMessageML(input, null, MessageML.MESSAGEML_VERSION);
     Element messageML = context.getMessageML();
@@ -43,12 +43,12 @@ public class TextAreaTest extends ElementTest {
   @Test
   public void testTextAreaWithAllAttributes() throws Exception {
     String input =
-        String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\" placeholder=\"%s\" required=\"true\">%s</textarea></form></messageML>",
-            NAME_VALUE, PLACEHOLDER_VALUE, INITIAL_VALUE);
+        String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\" placeholder=\"%s\" required=\"true\">%s</textarea>%s</form></messageML>",
+            NAME_VALUE, PLACEHOLDER_VALUE, INITIAL_VALUE, ACTION_BTN_ELE);
     String expectedPresentationML = String.format(
         "<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\" placeholder=\"%s\" "
-            + "required=\"true\">%s</textarea></form></div>",
-        NAME_VALUE, PLACEHOLDER_VALUE, INITIAL_VALUE);
+            + "required=\"true\">%s</textarea>%s</form></div>",
+        NAME_VALUE, PLACEHOLDER_VALUE, INITIAL_VALUE, ACTION_BTN_ELE);
 
     context.parseMessageML(input, null, MessageML.MESSAGEML_VERSION);
     Element messageML = context.getMessageML();
@@ -64,10 +64,10 @@ public class TextAreaTest extends ElementTest {
 
   @Test
   public void testTextAreaWithInitialValue() throws Exception {
-    String input = String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\">%s</textarea></form></messageML>", NAME_VALUE, INITIAL_VALUE);
+    String input = String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\">%s</textarea>%s</form></messageML>", NAME_VALUE, INITIAL_VALUE, ACTION_BTN_ELE);
     String expectedPresentationML =
-        String.format("<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\">%s</textarea></form></div>",
-            NAME_VALUE, INITIAL_VALUE);
+        String.format("<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\">%s</textarea>%s</form></div>",
+            NAME_VALUE, INITIAL_VALUE, ACTION_BTN_ELE);
 
     context.parseMessageML(input, null, MessageML.MESSAGEML_VERSION);
     Element messageML = context.getMessageML();
@@ -84,10 +84,10 @@ public class TextAreaTest extends ElementTest {
   @Test
   public void testTextAreaRequiredAttribute() throws Exception {
     String input =
-        String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\" required=\"true\"></textarea></form></messageML>", NAME_VALUE);
+        String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\" required=\"true\"></textarea>%s</form></messageML>", NAME_VALUE, ACTION_BTN_ELE);
     String expectedPresentationML = String.format(
-        "<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\" required=\"true\"></textarea></form></div>",
-        NAME_VALUE);
+        "<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\" required=\"true\"></textarea>%s</form></div>",
+        NAME_VALUE, ACTION_BTN_ELE);
 
     context.parseMessageML(input, null, MessageML.MESSAGEML_VERSION);
     Element messageML = context.getMessageML();
@@ -103,11 +103,11 @@ public class TextAreaTest extends ElementTest {
 
   @Test
   public void testTextAreaPlaceholderAttribute() throws Exception {
-    String input = String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\" placeholder=\"%s\"></textarea></form></messageML>", NAME_VALUE,
-        PLACEHOLDER_VALUE);
+    String input = String.format("<messageML><form id=\"form-id\"><textarea name=\"%s\" placeholder=\"%s\"></textarea>%s</form></messageML>", NAME_VALUE,
+        PLACEHOLDER_VALUE, ACTION_BTN_ELE);
     String expectedPresentationML = String.format(
-        "<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\" placeholder=\"%s\"></textarea></form></div>",
-        NAME_VALUE, PLACEHOLDER_VALUE);
+        "<div data-format=\"PresentationML\" data-version=\"2.0\"><form id=\"form-id\"><textarea name=\"%s\" placeholder=\"%s\"></textarea>%s</form></div>",
+        NAME_VALUE, PLACEHOLDER_VALUE, ACTION_BTN_ELE);
 
     context.parseMessageML(input, null, MessageML.MESSAGEML_VERSION);
     Element messageML = context.getMessageML();
